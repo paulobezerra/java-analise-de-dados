@@ -1,8 +1,25 @@
 package br.com.analyzer;
 
-public class Application {
+import br.com.analyzer.config.Config;
+import br.com.analyzer.infra.Bootstrap;
 
-    //Certificar que os diretórios existam
+import java.io.File;
+
+public class Application {
+    public static void main(String[] args) {
+        Config config = new Config();
+        Bootstrap bootstrap = new Bootstrap(config);
+        //Certificar que os diretórios existam
+        if (!bootstrap.makeSureAllDirectoriesExist()) {
+            System.out.println("Não foi possível localizar a pasta: "+config.getHomeDir());
+            return;
+        }
+
+
+
+    }
+
+
         //Entrar em loop infinito
         //Ler lista de arquivos com extensão .dat no path ~/data/in
             //Interar pelos arquivos existentes no diretório
