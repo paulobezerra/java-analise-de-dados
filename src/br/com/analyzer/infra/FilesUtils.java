@@ -2,8 +2,11 @@ package br.com.analyzer.infra;
 
 import br.com.analyzer.config.Config;
 import br.com.analyzer.domain.Analysis;
+import br.com.analyzer.domain.ReadError;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,6 +27,7 @@ public class FilesUtils {
         try {
             Files.createDirectories(Paths.get(this.config.getDirIn()));
             Files.createDirectories(Paths.get(this.config.getDirOut()));
+            Files.createDirectories(Paths.get(this.config.getDirLog()));
             return true;
         } catch (IOException e) {
             return false;
@@ -41,7 +45,9 @@ public class FilesUtils {
         }
     }
 
-    public void generateReport(Analysis analysis) {
+    public void generateReport(Analysis analysis, String filename) {
+//        String ouyFileName = String.join(File.separator, config.getDirOut(), filename);
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
     }
 
     public void removeFile(File f) {
@@ -50,10 +56,13 @@ public class FilesUtils {
     public List<String> readFile(String fileName) {
         List<String> lines = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-            lines.add(fileName);
+            stream.forEach(l -> lines.add(l));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    public void generateErrorLog(String fileName, List<ReadError> errors) {
     }
 }

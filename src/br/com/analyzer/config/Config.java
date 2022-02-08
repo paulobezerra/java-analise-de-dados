@@ -7,14 +7,19 @@ public class Config {
     private final String homeDir;
     private final String dirIn;
     private final String dirOut;
-    private final Pattern customerPattern = Pattern.compile("/[0-9]*\\ç[0-9]*\\ç[\\wau]*\\ç[0-9]*/u");
-    private final Pattern salesManPattern = Pattern.compile("/[0-9]*\\ç[0-9]*\\ç[\\wau\\ ]*\\ç[\\wau]*/u");
-    private final Pattern salesPattern = Pattern.compile("/[0-9]*\\ç[0-9]*\\ç\\[([0-9]*-[0-9]*[.]?([0-9]*)?-[0-9]*[.]?([0-9]*)?\\,?)*\\]\\ç[\\wau]*/ug");
+    private final String dirLog;
+    private final String customerId = "002";
+    private final String salesmanId = "001";
+    private final String salesId = "003";
+    private final String delimiterChar = "ç";
+    private final String itemDelimiterChar = ",";
+    private final String itemValuesDelimiterChar = "-";
 
     public Config() {
         this.homeDir = System.getProperty("user.home");
         this.dirIn = String.join(File.separator, homeDir, "data", "in");
         this.dirOut = String.join(File.separator, homeDir, "data", "out");
+        this.dirLog = String.join(File.separator, homeDir, "data", "log");
     }
 
     public String getHomeDir() {
@@ -27,5 +32,33 @@ public class Config {
 
     public String getDirOut() {
         return dirOut;
+    }
+
+    public String getDirLog() {
+        return dirLog;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public String getSalesmanId() {
+        return salesmanId;
+    }
+
+    public String getSalesId() {
+        return salesId;
+    }
+
+    public String getDelimiterChar() {
+        return delimiterChar;
+    }
+
+    public String getItemDelimiterChar() {
+        return itemDelimiterChar;
+    }
+
+    public String getItemValuesDelimiterChar() {
+        return itemValuesDelimiterChar;
     }
 }
