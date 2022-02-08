@@ -1,6 +1,7 @@
 package br.com.analyzer.infra;
 
 import br.com.analyzer.config.Config;
+import br.com.analyzer.domain.Analysis;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,5 +38,11 @@ public class FilesUtils {
         } catch (IOException e) {
             return new ArrayList<>();
         }
+    }
+
+    public void generateReport(Analysis analysis) {
+    }
+
+    public void removeFile(File f) {
     }
 }

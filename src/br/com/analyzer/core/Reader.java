@@ -5,6 +5,8 @@ import br.com.analyzer.domain.Registry;
 import br.com.analyzer.infra.FilesUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reader {
     private final Config config;
@@ -15,7 +17,7 @@ public class Reader {
         this.fileUtils = filesUtils;
     }
 
-    public Registry read(File f) {
-        return new Registry();
+    public List<Registry> read(File f) {
+        return new ArrayList<>();
     }
 }

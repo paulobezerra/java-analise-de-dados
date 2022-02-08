@@ -1,9 +1,12 @@
 package br.com.analyzer.core;
 
-public class Analyzer {
-    private final Recorder recorder;
+import br.com.analyzer.domain.Analysis;
 
-    public Analyzer(Recorder recorder) {
-        this.recorder = recorder;
+public class Analyzer {
+    public Analyzer() {
+    }
+
+    public Analysis analize(Recorder recorder) {
+        return new Analysis();
     }
 }
