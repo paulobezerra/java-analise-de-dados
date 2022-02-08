@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FilesUtils {
     private final Config config;
@@ -44,5 +45,15 @@ public class FilesUtils {
     }
 
     public void removeFile(File f) {
+    }
+
+    public List<String> readFile(String fileName) {
+        List<String> lines = new ArrayList<>();
+        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+            lines.add(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
     }
 }

@@ -28,8 +28,8 @@ O padrão dos dados devem ser:
 * Cliente:
   002çCNPJçNameçBusiness Area
   
-* Vendas: 
-  001çCPFçNameçSalary
+* Vendas:
+  003çSale IDç[Item ID-Item Quantity-Item Price]çSalesman name
   
 Para cada linha  do arquivo compatível com um dos padrões acima um objeto com o tipo específico é instanciado
 
