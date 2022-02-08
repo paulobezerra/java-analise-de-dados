@@ -30,7 +30,6 @@ public class Reader {
                             try {
                                 registries.add(builder.build(line));
                             } catch (Exception e) {
-                                e.printStackTrace();
                                 this.errors.add(new ReadError(line, e.getMessage()));
                             }
                         });
@@ -39,5 +38,9 @@ public class Reader {
 
     public List<ReadError> getErrors() {
         return errors;
+    }
+
+    public void clearErrors() {
+        this.errors = new ArrayList<>();
     }
 }

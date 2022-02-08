@@ -19,20 +19,8 @@ public class Salesman extends Registry{
         this.salesTotal = salesTotal;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public BigDecimal getSalesTotal() {
-        return salesTotal;
     }
 
     public static int compareByTotal(Salesman a, Salesman b) {

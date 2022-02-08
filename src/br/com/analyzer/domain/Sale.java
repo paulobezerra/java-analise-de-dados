@@ -39,10 +39,6 @@ public class Sale extends Registry{
         return salesId;
     }
 
-    public List<SalesItem> getItens() {
-        return itens;
-    }
-
     public String getSalesman() {
         return salesman;
     }

@@ -15,6 +15,7 @@ public class Application {
             return;
         }
 
+        System.out.println("Pronto para processar os arquivos da pasta: "+config.getDirIn());
         manager.process();
     }
 }

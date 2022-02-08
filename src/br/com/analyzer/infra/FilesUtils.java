@@ -50,7 +50,7 @@ public class FilesUtils {
         String outFileName = String.join(
                 File.separator,
                 config.getDirOut(),
-                filename.replace(config.getInExtension(), "") + datetime + config.getDoneExtension()
+                filename.replace(config.getInExtension(), "") + "_" + datetime + config.getDoneExtension()
         );
         BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
         writer.write("Quantidade de clientes no arquivo de entrada: " + analysis.getQuantityCustomer());
@@ -61,6 +61,7 @@ public class FilesUtils {
         writer.newLine();
         writer.write("Pior vendedor: " + analysis.getWorstSeller().getName());
         writer.close();
+        System.out.println("Relatório gerado: " + outFileName);
     }
 
     private String getDateTime() {
@@ -85,7 +86,7 @@ public class FilesUtils {
         String outFileName = String.join(
                 File.separator,
                 config.getDirLog(),
-                filename.replace(config.getInExtension(), "") + datetime + config.getErrorLogExtension()
+                filename.replace(config.getInExtension(), "") + "_" + datetime + config.getErrorLogExtension()
         );
         BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
 
@@ -98,6 +99,7 @@ public class FilesUtils {
             }
         });
         writer.close();
+        System.out.println("Algumas linhas não poderam ser processadas: " + outFileName);
     }
 }
 

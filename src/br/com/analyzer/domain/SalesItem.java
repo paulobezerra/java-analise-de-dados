@@ -13,18 +13,6 @@ public class SalesItem {
         this.price = new BigDecimal(chunks[2]);
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
     public BigDecimal getTotal() {
         return new BigDecimal(quantity).multiply(price);
     }

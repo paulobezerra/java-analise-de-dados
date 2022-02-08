@@ -1,7 +1,6 @@
 package br.com.analyzer.config;
 
 import java.io.File;
-import java.util.regex.Pattern;
 
 public class Config {
     private final String homeDir;
@@ -17,6 +16,7 @@ public class Config {
     private final String inExtension =  ".dat";
     private final String doneExtension =  ".done.dat";
     private final String errorLogExtension =  ".error.log";
+    private final int sleepTime = 3000;
 
     public Config() {
         this.homeDir = System.getProperty("user.home");
@@ -75,5 +75,9 @@ public class Config {
 
     public String getErrorLogExtension() {
         return errorLogExtension;
+    }
+
+    public int getSleepTime() {
+        return sleepTime;
     }
 }

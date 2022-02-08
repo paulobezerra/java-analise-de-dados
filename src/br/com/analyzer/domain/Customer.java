@@ -11,16 +11,4 @@ public class Customer extends Registry{
         this.name = chunks[2];
         this.businessArea = chunks[3];
     }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getBusinessArea() {
-        return businessArea;
-    }
 }

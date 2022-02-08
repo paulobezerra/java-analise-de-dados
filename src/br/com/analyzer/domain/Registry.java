@@ -6,8 +6,4 @@ public abstract class Registry {
     public Registry(String type) {
         this.type = type;
     }
-
-    public String getType() {
-        return this.type;
-    }
 }
