@@ -1,28 +1,26 @@
 package br.com.analyzer;
 
 import br.com.analyzer.config.Config;
-import br.com.analyzer.infra.Bootstrap;
-
-import java.io.File;
+import br.com.analyzer.infra.FilesUtils;
+import br.com.analyzer.core.Manager;
 
 public class Application {
     public static void main(String[] args) {
         Config config = new Config();
-        Bootstrap bootstrap = new Bootstrap(config);
+        FilesUtils filesUtils = new FilesUtils(config);
+        Manager manager = new Manager(config, filesUtils);
+
         //Certificar que os diretórios existam
-        if (!bootstrap.makeSureAllDirectoriesExist()) {
+        if (!filesUtils.makeSureAllDirectoriesExist()) {
             System.out.println("Não foi possível localizar a pasta: "+config.getHomeDir());
             return;
         }
 
-
-
+        manager.process();
     }
 
 
-        //Entrar em loop infinito
-        //Ler lista de arquivos com extensão .dat no path ~/data/in
-            //Interar pelos arquivos existentes no diretório
+
                 //Interar por cada linha do arquivo
                     //Identificar o padrão de cada linha (vendedor, cliente, vendas)
                     //Instanciar objeto de acordo com padrão identificado
