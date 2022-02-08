@@ -2,13 +2,12 @@ package br.com.analyzer.core;
 
 import br.com.analyzer.config.Config;
 import br.com.analyzer.domain.Analysis;
-import br.com.analyzer.domain.ReadError;
 import br.com.analyzer.domain.Registry;
 import br.com.analyzer.infra.FilesUtils;
 import br.com.analyzer.infra.Timer;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class Manager {
@@ -28,13 +27,18 @@ public class Manager {
         List<File> files = this.filesUtils.getAllFiles();
         if (files.size() > 0) {
             files.forEach(f -> {
-                List<Registry> registries = this.reader.read(f);
-                Analysis analysis = this.analyzer.analize(registries);
-                this.filesUtils.generateReport(analysis, f.getName());
-                this.filesUtils.generateErrorLog(f.getName(), this.reader.getErrors());
-                this.filesUtils.removeFile(f);
+                try {
+                    List<Registry> registries = this.reader.read(f);
+                    Analysis analysis = this.analyzer.analize(registries);
+                    this.filesUtils.generateReport(analysis, f.getName());
+                    this.filesUtils.generateErrorLog(f.getName(), this.reader.getErrors());
+                    f.delete();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             });
         }
+
         Timer.setTimeout(() -> this.process(), 5000);
     }
 }

@@ -14,6 +14,9 @@ public class Config {
     private final String delimiterChar = "ç";
     private final String itemDelimiterChar = ",";
     private final String itemValuesDelimiterChar = "-";
+    private final String inExtension =  ".dat";
+    private final String doneExtension =  ".done.dat";
+    private final String errorLogExtension =  ".error.log";
 
     public Config() {
         this.homeDir = System.getProperty("user.home");
@@ -60,5 +63,17 @@ public class Config {
 
     public String getItemValuesDelimiterChar() {
         return itemValuesDelimiterChar;
+    }
+
+    public String getDoneExtension() {
+        return doneExtension;
+    }
+
+    public String getInExtension() {
+        return inExtension;
+    }
+
+    public String getErrorLogExtension() {
+        return errorLogExtension;
     }
 }

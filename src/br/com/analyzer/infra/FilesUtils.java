@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,7 +36,7 @@ public class FilesUtils {
     public List<File> getAllFiles() {
         try {
             return Files.list(Paths.get(this.config.getDirIn()))
-                    .filter(path -> path.toString().endsWith(".dat"))
+                    .filter(path -> path.toString().endsWith(this.config.getInExtension()))
                     .map(Path::toFile)
                     .collect(Collectors.toList());
         } catch (IOException e) {
@@ -45,12 +44,27 @@ public class FilesUtils {
         }
     }
 
-    public void generateReport(Analysis analysis, String filename) {
-//        String ouyFileName = String.join(File.separator, config.getDirOut(), filename);
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+    public void generateReport(Analysis analysis, String filename) throws IOException {
+        String datetime = getDateTime();
+
+        String outFileName = String.join(
+                File.separator,
+                config.getDirOut(),
+                filename.replace(config.getInExtension(), "") + datetime + config.getDoneExtension()
+        );
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
+        writer.write("Quantidade de clientes no arquivo de entrada: " + analysis.getQuantityCustomer());
+        writer.newLine();
+        writer.write("Quantidade de vendedores no arquivo de entrada: " + analysis.getQuantitySalesman());
+        writer.newLine();
+        writer.write("ID da venda mais cara: " + analysis.getSaleMoreExpensive().getSalesId());
+        writer.newLine();
+        writer.write("Pior vendedor: " + analysis.getWorstSeller().getName());
+        writer.close();
     }
 
-    public void removeFile(File f) {
+    private String getDateTime() {
+        return String.valueOf((new Date()).getTime());
     }
 
     public List<String> readFile(String fileName) {
@@ -63,6 +77,27 @@ public class FilesUtils {
         return lines;
     }
 
-    public void generateErrorLog(String fileName, List<ReadError> errors) {
+    public void generateErrorLog(String filename, List<ReadError> errors) throws IOException {
+        if (errors.size() == 0) return;
+
+        String datetime = getDateTime();
+
+        String outFileName = String.join(
+                File.separator,
+                config.getDirLog(),
+                filename.replace(config.getInExtension(), "") + datetime + config.getErrorLogExtension()
+        );
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
+
+        errors.forEach(e -> {
+            try {
+                writer.write(e.getLine() + ": "+e.getMessage());
+                writer.newLine();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        writer.close();
     }
 }
+
