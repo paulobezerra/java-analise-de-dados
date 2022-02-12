@@ -81,12 +81,17 @@ Cada arquivo de saida contém:
 * O pior vendedor
 
 ## Resolução
-* Para poder ter vários consumerPaulo que possamos processar arquivos paralelamente 
+* A ideia é ter um único producer observando os arquivos do diretório ~/data/in, a cada novo arquivo a aplicação deve 
+  incluir o arquivo na fila e limpa-lo do diretório    
+
+* Podem rodar paralelamente várias instancias da aplicação producer, permitindo que o processamento dos arquivos possam
+ocorrer em paralelo
+  
+* Como gerenciador da fila utilizei o RabbitMQ rodando em um container Docker integrado a aplicação via biblioteca do 
+  Spring. 
 
 * Para lidar com busca, criação e exclusão de arquivos e diretórios utilizei a biblioteca  java.nio.file que facilita 
   todo o processo
   
-* Utilizei o pattern de Builder para instanciar cada objeto de acordo com o tipo (vendedor, cliente e venda)
-
-* Um objeto FileData deve conter 3 arrays de dados (vendedor, cliente e vendas) e conseguir fazer os calculos 
-  necessários para gerar o arquivo de saída. 
+* Para facilitar a organização da aplicação e testes utilizei uma template básico de projeto do https://start.spring.io/
+  
