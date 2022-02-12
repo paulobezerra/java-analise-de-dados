@@ -1,0 +1,16 @@
+app:
+  message: Message has been sent Successfully..
+spring:
+  rabbitmq:
+    dynamic: true
+    host: localhost
+    password: guest
+    port: 5672
+    username: guest
+    exchange: analyzer.exchange
+    queue: analyzer.queue
+    routingkey: analyzer.routingkey
+  files:
+    extension: .dat
+server:
+  port: 9091
