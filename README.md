@@ -15,12 +15,14 @@ Password: guest
 A aplicação Producer é responsavel por monitorar o diretório ~/data/in, mover os novos arquivos para ~/data/processing, 
 e incluir na fila do RabbitMQ para que os arquivos seja processados.
 Para subir esta aplicação, entre no diretório producer e execute o seginte comando:
-`./mvnw spring-boot:run`
+* `./mvnw spring-boot:run`
 
 ## Rodando Consumer
 A aplicação consumer é responsavel por processar e gerar o relatório para cada arquivo processado. Para executar esta 
 aplicação entre no diretório consumer e execute o seguinte comando:
-`./mvnw spring-boot:run`
+* `./mvnw spring-boot:run`
+
+### OBS.: Projeto foi implemnetando utilizando o Intellij Communit e basta executar os aquivos Application.java dos projetos para rodar ou debugar via IDE.
 
 ## Funcionanmento
 Com RabbitMQ, Producer e Consumer em execução, o arquivo a ser processado deve ser removido no diretório ~/data/in
