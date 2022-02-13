@@ -33,6 +33,7 @@ public class AnalyzerService {
                 .map(r -> (Sale) r)
                 .collect(Collectors.toList());
 
+        //to not return null, use an empty object
         if (sales.size() == 0) return new Sale();
 
         return sales.stream().max(Sale::compareByTotal).get();
@@ -49,7 +50,8 @@ public class AnalyzerService {
                 .map(r -> (Sale) r)
                 .collect(Collectors.toList());
 
-        if (sales.size() == 0) {
+        if (sales.size() == 0 || salesmen.size() == 0) {
+            //to not return null, use an empty object
             return new Salesman();
         }
 

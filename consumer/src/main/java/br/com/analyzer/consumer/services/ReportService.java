@@ -47,7 +47,7 @@ public class ReportService {
         if (analysis.getWorstSeller().getName() != null) {
             writer.write("Pior vendedor: " + analysis.getWorstSeller().getName());
         } else {
-            writer.write("Pior vendedor: Nenhuma venda no arquivo analisado");
+            writer.write("Pior vendedor: Nenhuma venda ou vendedor no arquivo analisado");
         }
         writer.close();
 
