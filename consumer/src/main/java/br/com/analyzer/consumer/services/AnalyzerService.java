@@ -33,7 +33,7 @@ public class AnalyzerService {
                 .map(r -> (Sale) r)
                 .collect(Collectors.toList());
 
-        if (sales.size() == 0) return null;
+        if (sales.size() == 0) return new Sale();
 
         return sales.stream().max(Sale::compareByTotal).get();
     }
@@ -48,6 +48,10 @@ public class AnalyzerService {
                 .filter(r -> r.getClass().equals(Sale.class))
                 .map(r -> (Sale) r)
                 .collect(Collectors.toList());
+
+        if (sales.size() == 0) {
+            return new Salesman();
+        }
 
         salesmen.forEach(salesman -> {
             salesman.setSalesTotal(sales.stream()

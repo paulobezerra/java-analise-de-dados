@@ -44,4 +44,46 @@ class AnalyzerServiceTest {
         assertEquals("Paulo", analysis.getWorstSeller().getName());
     }
 
+    @Test
+    public void mustAnaliseRegistersWithoutSales() {
+        Salesman salesman1 = new Salesman("001ç1234567891234çPedroç50000".split("ç"));
+        Salesman salesman2 = new Salesman("001ç3245678865434çPauloç40000.99".split("ç"));
+
+        Customer customer1 = new Customer("002ç2345675434544345çJose da SilvaçRural".split("ç"));
+        Customer customer2 = new Customer("002ç2345675433444345çEduardo PereiraçRural".split("ç"));
+
+        List<Registry> registries = Arrays.asList(salesman1, salesman2, customer1, customer2);
+
+        Analysis analysis = analyzer.analize(registries);
+
+        assertEquals(2, analysis.getQuantityCustomer());
+        assertEquals(2, analysis.getQuantitySalesman());
+        assertEquals(null, analysis.getSaleMoreExpensive().getSalesId());
+        assertEquals(null, analysis.getWorstSeller().getName());
+    }
+
+    @Test
+    public void mustAnaliseRegistersWithTwoSalesmanTiedAsWorst() {
+        //in this case the worst is the salesman with the best salary
+        Salesman salesman1 = new Salesman("001ç1234567891234çPedroç50000".split("ç"));
+        Salesman salesman2 = new Salesman("001ç3245678865434çPauloç40000.99".split("ç"));
+        Salesman salesman3 = new Salesman("001ç3245678865434çGabrielç2000".split("ç"));
+
+        Customer customer1 = new Customer("002ç2345675434544345çJose da SilvaçRural".split("ç"));
+        Customer customer2 = new Customer("002ç2345675433444345çEduardo PereiraçRural".split("ç"));
+
+        Sale sale1 = new Sale("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro".split("ç"), ",", "-");
+        Sale sale2 = new Sale("003ç08ç[1-10-10]çPaulo".split("ç"), ",", "-");
+        Sale sale3 = new Sale("003ç06ç[1-10-10]çGabriel".split("ç"), ",", "-");
+
+        List<Registry> registries = Arrays.asList(salesman1, salesman2, salesman3, customer1, customer2, sale1, sale2, sale3);
+
+        Analysis analysis = analyzer.analize(registries);
+
+        assertEquals(2, analysis.getQuantityCustomer());
+        assertEquals(3, analysis.getQuantitySalesman());
+        assertEquals(10, analysis.getSaleMoreExpensive().getSalesId());
+        assertEquals("Paulo", analysis.getWorstSeller().getName());
+    }
+
 }

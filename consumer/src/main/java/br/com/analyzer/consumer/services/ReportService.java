@@ -33,12 +33,24 @@ public class ReportService {
         BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
         writer.write("Quantidade de clientes no arquivo de entrada: " + analysis.getQuantityCustomer());
         writer.newLine();
+
         writer.write("Quantidade de vendedores no arquivo de entrada: " + analysis.getQuantitySalesman());
         writer.newLine();
-        writer.write("ID da venda mais cara: " + analysis.getSaleMoreExpensive().getSalesId());
+
+        if (analysis.getSaleMoreExpensive().getSalesId() != null) {
+            writer.write("ID da venda mais cara: " + analysis.getSaleMoreExpensive().getSalesId());
+        } else {
+            writer.write("ID da venda mais cara: Nenhuma venda no arquivo analisado");
+        }
         writer.newLine();
-        writer.write("Pior vendedor: " + analysis.getWorstSeller().getName());
+
+        if (analysis.getWorstSeller().getName() != null) {
+            writer.write("Pior vendedor: " + analysis.getWorstSeller().getName());
+        } else {
+            writer.write("Pior vendedor: Nenhuma venda no arquivo analisado");
+        }
         writer.close();
+
         System.out.println("Relatório gerado: " + outFileName);
     }
 }

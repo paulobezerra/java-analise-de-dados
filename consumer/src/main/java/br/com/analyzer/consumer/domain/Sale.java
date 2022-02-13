@@ -10,6 +10,11 @@ public class Sale extends Registry{
     private List<SalesItem> itens;
     private String salesman;
 
+    public Sale() {
+        super("000");
+        this.itens = new ArrayList<>();
+    }
+
     public Sale(String[] chunks, String itemsDelimiterChar, String valuesDelimiterChar) {
         super(chunks[0]);
         this.salesId = Integer.parseInt(chunks[1]);

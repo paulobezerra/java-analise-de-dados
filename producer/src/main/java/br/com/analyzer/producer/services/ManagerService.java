@@ -45,11 +45,14 @@ public class ManagerService {
     private void processFile(File f) {
         try {
             byte[] fileData = Files.readAllBytes(f.toPath());
-            Message message = MessageBuilder.withBody(fileData)
-                    .setHeader("Content-type", "text/plain")
-                    .setHeader("File-name", f.getName())
-                    .build();
-            this.toQueue(message);
+
+            if (fileData.length > 0) {
+                Message message = MessageBuilder.withBody(fileData)
+                        .setHeader("Content-type", "text/plain")
+                        .setHeader("File-name", f.getName())
+                        .build();
+                this.toQueue(message);
+            }
             this.removeFiles(f);
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,6 +8,10 @@ public class Salesman extends Registry{
     private BigDecimal salary;
     private BigDecimal salesTotal;
 
+    public Salesman() {
+        super("000");
+    }
+
     public Salesman(String[] chunks) {
         super(chunks[0]);
         this.cpf = chunks[1];
@@ -36,6 +40,10 @@ public class Salesman extends Registry{
     }
 
     public static int compareByTotal(Salesman a, Salesman b) {
-        return a.salesTotal.compareTo(b.salesTotal);
+        int compare = a.salesTotal.compareTo(b.salesTotal);
+        if (compare == 0) {
+            return a.salary.compareTo(b.salary) * -1;
+        }
+        return compare;
     }
 }
